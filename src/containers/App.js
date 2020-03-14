@@ -5,7 +5,6 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {Link as RouterLink} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import MenuComponent from "./MenuComponent";
 import {ApiService} from "../api/ApiService";
 import Typography from "@material-ui/core/Typography";
 
