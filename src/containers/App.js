@@ -7,6 +7,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuComponent from "./MenuComponent";
 import {ApiService} from "../api/ApiService";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,7 +24,13 @@ const useStyles = makeStyles(theme => ({
         right: 30,
         bottom: 20,
         position: "fixed"
-    }
+    },
+    title: {
+        flexGrow: 1,
+        textAlign: "center",
+        padding: theme.spacing(2),
+        color: '#575757'
+    },
 }));
 
 const App = () => {
@@ -48,7 +55,9 @@ const App = () => {
 
     return (
         <div className={classes.root}>
-            <MenuComponent/>
+            <Typography variant="h4" className={classes.title} color="inherit">
+                Projects
+            </Typography>
             {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : models &&
                 <ModelsContainer cards={models}/>}
             <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/add">

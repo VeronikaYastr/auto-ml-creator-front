@@ -16,12 +16,6 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
-        flexGrow: 1,
-        textAlign: "center",
-        padding: theme.spacing(2),
-        color: '#575757'
-    },
     navTitle: {
         flexGrow: 1,
     }
@@ -94,9 +88,6 @@ export default function MenuComponent() {
                         )}
                     </Toolbar>
                 </AppBar>
-                <Typography variant="h4" className={classes.title} color="inherit">
-                    Workspace
-                </Typography>
         </div>
     );
 }

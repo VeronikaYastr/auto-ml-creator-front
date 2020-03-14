@@ -2,6 +2,7 @@ import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import ModelCard from "../components/ModelCard";
 import Grid from '@material-ui/core/Grid';
+import ScrollArea from "react-scrollbar";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,15 +17,17 @@ function ModelsContainer(props) {
     const [spacing, setSpacing] = React.useState(4);
 
     return (
-        <div className={classes.root}>
-            <Grid container justify="flex-start" spacing={spacing}>
-                {props.cards.map(card => (
-                    <Grid key={card.id} item>
-                        <ModelCard card={card}/>
-                    </Grid>
-                ))}
-            </Grid>
-        </div>
+        <ScrollArea speed={0.2} smoothScrolling={true}>
+            <div className={classes.root}>
+                <Grid container justify="flex-start" spacing={spacing}>
+                    {props.cards.map(card => (
+                        <Grid key={card.id} item>
+                            <ModelCard card={card}/>
+                        </Grid>
+                    ))}
+                </Grid>
+            </div>
+        </ScrollArea>
     )
 }
 
