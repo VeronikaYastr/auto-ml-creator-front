@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -8,18 +8,27 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '80%',
-        position: 'relative',
-        right: 0,
-        bottom: 0
+        width: '100%',
+        flex: 1,
+    },
+    mainContainer: {
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginRight: theme.spacing(5)
     },
     backButton: {
         marginRight: theme.spacing(1),
+        marginLeft: 10,
+        flex: 1
     },
     instructions: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
-        color: '#575757'
+        marginLeft: 10,
+        color: '#575757',
+        flex: 1
     },
 }));
 
@@ -55,10 +64,6 @@ export default function MLStepper() {
         setActiveStep(prevActiveStep => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
     return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep} alternativeLabel>
@@ -70,17 +75,16 @@ export default function MLStepper() {
             </Stepper>
             <div>
                 {activeStep === steps.length ? (
-                    <div>
+                    <div className={classes.mainContainer}>
                         <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
                     </div>
                 ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                    <div className={classes.mainContainer}>
                         <div>
                             <Button
                                 disabled={activeStep === 0}
                                 onClick={handleBack}
+                                color = 'secondary'
                                 className={classes.backButton}
                             >
                                 Back

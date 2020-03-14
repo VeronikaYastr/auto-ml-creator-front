@@ -3,6 +3,11 @@ import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import MLStepper from "../components/MLStepper";
 import ScrollArea from "react-scrollbar";
+import MLTabs from "../components/MLTabs";
+import DoneIcon from '@material-ui/icons/Done';
+import {green} from '@material-ui/core/colors';
+import Fab from "@material-ui/core/Fab";
+import {Link as RouterLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,9 +21,23 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
         color: '#575757'
     },
+    saveButton: {
+        right: 30,
+        bottom: 20,
+        position: "fixed",
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[600],
+        },
+    },
+    stepper: {
+        flex: 1,
+        justifyContent: "flex-end",
+        marginBottom: 50
+    }
 }));
 
-const Test = () => {
+const Workspace = () => {
     const classes = useStyles();
     const [models, setModels] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -44,10 +63,14 @@ const Test = () => {
                 <Typography variant="h4" className={classes.title} color="inherit">
                     Workspace
                 </Typography>
+                <MLTabs/>
                 <MLStepper/>
+                {/*<Fab aria-label="add" className={classes.saveButton} component={RouterLink} to="/add">
+                    <DoneIcon style={{color: '#FFFFFF'}}/>
+                </Fab>*/}
             </div>
         </ScrollArea>
     );
 };
 
-export default Test
+export default Workspace
