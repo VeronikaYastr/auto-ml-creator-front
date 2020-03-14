@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <Typography
@@ -46,9 +46,17 @@ const useStyles = makeStyles(theme => ({
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
     },
+    tab: {
+        display: 'flex',
+        flex: 1,
+    }
 }));
 
-export default function MLTabs() {
+const tabs = [[<Tab label="Upload" {...a11yProps(0)} />, <Tab label="Clean" {...a11yProps(1)} />,
+    <Tab label="Transform" {...a11yProps(2)} />, <Tab label="Remove outliers" {...a11yProps(3)} />],
+    [<Tab label="Missing Data" {...a11yProps(0)} />]];
+
+export default function MLTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -66,9 +74,7 @@ export default function MLTabs() {
                 aria-label="Vertical tabs example"
                 className={classes.tabs}
             >
-                <Tab label="Missing Data" {...a11yProps(0)} />
-                <Tab label="Transformation" {...a11yProps(1)} />
-                <Tab label="Outliers" {...a11yProps(2)} />
+                {tabs[props.index]}
             </Tabs>
             <TabPanel value={value} index={0}>
                 Item One
@@ -78,6 +84,9 @@ export default function MLTabs() {
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                Item Four
             </TabPanel>
         </div>
     );

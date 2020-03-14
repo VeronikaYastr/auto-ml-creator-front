@@ -5,6 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import MLTabs from "./MLTabs";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -66,6 +67,7 @@ export default function MLStepper() {
 
     return (
         <div className={classes.root}>
+            <MLTabs index={activeStep}/>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map(label => (
                     <Step key={label}>
