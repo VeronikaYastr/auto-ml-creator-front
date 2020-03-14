@@ -6,6 +6,7 @@ import { Router } from "react-router-dom"
 import {createBrowserHistory} from 'history'
 
 import Navigator from './containers/Navigator'
+import MenuComponent from "./containers/MenuComponent";
 
 const theme = createMuiTheme({
     palette: {
@@ -27,6 +28,7 @@ const history = createBrowserHistory();
 
 ReactDOM.render((
     <ThemeProvider theme={theme}>
+        <MenuComponent/>
         <Router history={history}>
             <Navigator/>
         </Router>

@@ -6,10 +6,22 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import CardOptions from "./CardOptions";
 
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
+    },
+    cardTitle: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginRight: -15
+    },
+    options: {
+        position: 'relative',
+        right: -2,
+        top: -7
     },
     bullet: {
         display: 'inline-block',
@@ -40,9 +52,14 @@ export default function ModelCard(props) {
     return (
         <Card className={classes.root}>
             <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {props.card.title}
-                </Typography>
+                <div className={classes.cardTitle}>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {props.card.title}
+                    </Typography>
+                    <div className={classes.options}>
+                        <CardOptions/>
+                    </div>
+                </div>
                 <Typography variant="body2" component="p">
                     {props.card.description}
                 </Typography>
