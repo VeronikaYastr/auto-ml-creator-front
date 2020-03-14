@@ -1,7 +1,7 @@
 /** A base class to send queries to the backend. */
 export class ApiClient {
 
-    HOST = 'http://192.168.100.4:9090/auto-ml-creator/v1/';
+    HOST = 'http://192.168.100.3:9090/auto-ml-creator/v1/';
 
     get(url) {
         console.log('Sending GET request ' + this.HOST + url);

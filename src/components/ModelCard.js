@@ -6,7 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
 const useStyles = makeStyles({
     root: {

@@ -1,30 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import ModelsContainer from "./ModelsContainer";
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import {Link as RouterLink} from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuComponent from "./MenuComponent";
 import {ApiService} from "../api/ApiService";
 
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            light: '#B574BF',
-            main: '#760B87',
-        },
-        secondary: {
-            main: '#890620',
-        },
-        success: {
-            main: '#2EA155',
-        }
-    },
-});
-
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1,
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    spinnerStyle: {
+        flex: 1,
+        marginTop: theme.spacing(10),
+        textAlign: "center"
     },
     button: {
         right: 30,
@@ -36,30 +29,31 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
     const classes = useStyles();
     const [models, setModels] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         new ApiService().getAllModelsForUser(1)
             .then((response) => {
                 if (response === undefined || response.error) {
-                    console.log("Error");
+                    console.log("Received error from server.");
                     setModels([]);
                 } else
                     setModels(response);
+                setLoading(false);
             }).catch((error) => {
+            console.log("Unexpected error.");
             setLoading(false);
         });
     }, []);
 
     return (
         <div className={classes.root}>
-            <ThemeProvider theme={theme}>
-                <MenuComponent/>
-                {models && <ModelsContainer cards={models}/>}
-                <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/add">
-                    <AddIcon/>
-                </Fab>
-            </ThemeProvider>
+            <MenuComponent/>
+            {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : models &&
+                <ModelsContainer cards={models}/>}
+            <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/add">
+                <AddIcon/>
+            </Fab>
         </div>
     );
 };

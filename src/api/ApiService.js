@@ -6,17 +6,6 @@ export class ApiService {
         this.apiClient = new ApiClient();
     }
 
-    register(gender, birthDate, weight, height, physicalActivity, targetWeight) {
-        return this.apiClient.post('users/register', {
-            gender,
-            birthDate,
-            weight,
-            height,
-            physicalActivity,
-            targetWeight,
-        });
-    }
-
     login(email, password) {
         console.log("Sending request to users/login");
         return this.apiClient.post('users/login', {
