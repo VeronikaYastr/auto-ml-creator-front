@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import MLStepper from "../components/MLStepper";
+import MLStepper from "../components/workspace/MLStepper";
 import ScrollArea from "react-scrollbar";
 import {green} from '@material-ui/core/colors';
 

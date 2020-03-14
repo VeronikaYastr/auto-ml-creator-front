@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
 
 const tabs = [[<Tab label="Upload" {...a11yProps(0)} />, <Tab label="Clean" {...a11yProps(1)} />,
     <Tab label="Transform" {...a11yProps(2)} />, <Tab label="Remove outliers" {...a11yProps(3)} />],
-    [<Tab label="Missing Data" {...a11yProps(0)} />]];
+    [<Tab label="Choose" {...a11yProps(0)} />, <Tab label="Fill parameters" {...a11yProps(1)} />]];
 
 export default function MLTabs(props) {
     const classes = useStyles();
