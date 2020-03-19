@@ -19,6 +19,11 @@ export class ApiService {
         return this.apiClient.get('ml-models/' + userId);
     }
 
+    uploadFile(file) {
+        console.log("Upload file.");
+        return this.apiClient.post('files/upload/', file);
+    }
+
     getAllFavBoardsForUser(userId) {
         console.log("Request all fav boards for user");
         return this.apiClient.get('boards?userId=' + userId + '&filterBy=fav');
