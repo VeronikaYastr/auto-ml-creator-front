@@ -8,6 +8,8 @@ import {createBrowserHistory} from 'history'
 import Navigator from './containers/Navigator'
 import MenuComponent from "./containers/MenuComponent";
 
+import "./index.css";
+
 const theme = createMuiTheme({
     palette: {
         primary: {

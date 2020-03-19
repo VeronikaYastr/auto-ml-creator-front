@@ -5,6 +5,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import UploadData from "../steps/transform/UploadData";
+import MissingValue from "../steps/transform/MissingValue";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -41,27 +43,45 @@ const useStyles = makeStyles(theme => ({
         flex: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'flex',
-        height: 400,
+        //height: 400,
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
     },
-    tab: {
-        display: 'flex',
+    tabsContent: {
         flex: 1,
-    }
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex'
+    },
 }));
 
-const tabs = [[<Tab label="Upload" {...a11yProps(0)} />, <Tab label="Clean" {...a11yProps(1)} />,
-    <Tab label="Transform" {...a11yProps(2)} />, <Tab label="Remove outliers" {...a11yProps(3)} />],
-    [<Tab label="Choose" {...a11yProps(0)} />, <Tab label="Fill parameters" {...a11yProps(1)} />]];
+let enabledTab = -1;
+
+const tabs = [
+    [
+        <Tab disabled={0 <= enabledTab} label="Upload" {...a11yProps(0)} />,
+        <Tab disabled={1 <= enabledTab} label="Clean" {...a11yProps(1)} />,
+        <Tab disabled={2 <= enabledTab} label="Transform" {...a11yProps(2)} />,
+        <Tab disabled={3 <= enabledTab} label="Remove outliers" {...a11yProps(3)} />
+    ],
+    [
+        <Tab label="Choose" {...a11yProps(0)} />,
+        <Tab label="Fill parameters" {...a11yProps(1)} />
+    ]
+];
+
+const tabsContent = [[<UploadData/>, <MissingValue/>], [<UploadData/>]];
 
 export default function MLTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        if (newValue >= enabledTab) {
+            enabledTab = newValue;
+            setValue(newValue);
+        }
     };
 
     return (
@@ -76,18 +96,20 @@ export default function MLTabs(props) {
             >
                 {tabs[props.index]}
             </Tabs>
-            <TabPanel value={value} index={0}>
-                Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Four
-            </TabPanel>
+            <div className={classes.tabsContent}>
+                <TabPanel value={value} index={0}>
+                    {tabsContent[props.index][0]}
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    {tabsContent[props.index][1]}
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    Item Three
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    Item Four
+                </TabPanel>
+            </div>
         </div>
     );
 }

@@ -14,8 +14,11 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
         textAlign: "center",
+        marginLeft: 60,
         padding: theme.spacing(2),
-        color: '#575757'
+        color: '#575757',
+        fontFamily: 'Muli',
+        fontStyle: "bold"
     },
     saveButton: {
         right: 30,

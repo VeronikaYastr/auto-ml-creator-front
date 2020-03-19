@@ -7,6 +7,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {ApiService} from "../api/ApiService";
 import Typography from "@material-ui/core/Typography";
+import "../index.css";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -28,7 +29,9 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         textAlign: "center",
         padding: theme.spacing(2),
-        color: '#575757'
+        color: '#575757',
+        fontFamily: 'Muli',
+        fontStyle: "bold"
     },
 }));
 
@@ -40,7 +43,7 @@ const App = () => {
     useEffect(() => {
         new ApiService().getAllModelsForUser(1)
             .then((response) => {
-                if (response === undefined || response.error) {
+                if (response === undefined || response.errors) {
                     console.log("Received error from server.");
                     setModels([]);
                 } else

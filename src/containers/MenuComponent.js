@@ -18,6 +18,8 @@ const useStyles = makeStyles(theme => ({
     },
     navTitle: {
         flexGrow: 1,
+        fontFamily: 'Muli',
+        fontStyle: "bold"
     }
 }));
 
