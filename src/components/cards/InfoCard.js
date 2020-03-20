@@ -4,12 +4,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import HelpOutlinedIcon from '@material-ui/icons/HelpOutlined';
-import '../../index.css';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
-        maxWidth: 275,
+        width: 275,
+        height: 260,
         marginLeft: 20
     },
     cardTitle: {

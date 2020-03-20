@@ -29,6 +29,17 @@ export class ApiClient {
             });
     }
 
+    postWithoutBody(url) {
+        console.log('Sending POST request without body' + this.HOST + url);
+        return fetch(this.HOST + url, {
+            method: 'POST',
+        })
+            .then(response => response.json())
+            .catch((error) => {
+                console.log('Problems with POST method: ' + error.message)
+            });
+    }
+
     delete(url) {
         console.log('Sending DELETE request ' + this.HOST + url);
         return fetch(this.HOST + url, {

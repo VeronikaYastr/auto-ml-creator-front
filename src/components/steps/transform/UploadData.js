@@ -163,7 +163,7 @@ export default function UploadData() {
                 />
                 <label htmlFor="raised-button-file">
                     <Button variant="contained" component="span" className={classes.chooseButton}>
-                        Choose
+                        Choose file
                     </Button>
                 </label>
             </div>)}

@@ -1,4 +1,5 @@
 import {ApiClient} from './ApiClient';
+import {strategies} from "../static/nullValuesStrategies";
 
 /** A wrapper class to construct, send and handle server queries. */
 export class ApiService {
@@ -24,66 +25,46 @@ export class ApiService {
         return this.apiClient.post('files/upload/', file);
     }
 
-    getAllFavBoardsForUser(userId) {
-        console.log("Request all fav boards for user");
-        return this.apiClient.get('boards?userId=' + userId + '&filterBy=fav');
+    dropValues(datasetId, cols, how, minNonNullValue) {
+        let url = 'data/transformation//missing-data' + datasetId + '/drop?columns=' + cols;
+        if (how != null) {
+            url += '&how=' + how;
+        }
+        if (minNonNullValue != null) {
+            url += '&minNonNull=' + minNonNullValue;
+        }
+        return this.apiClient.postWithoutBody(url);
     }
 
-    setBoardIsFavourite(boardId) {
-        console.log("Set isFavourite for board " + boardId);
-        return this.apiClient.put('boards/' + boardId + '/fav');
-    }
-
-    getBoardIsFavourite(boardId) {
-        console.log("Get isFavourite for board " + boardId);
-        return this.apiClient.get('boards/' + boardId + '/fav');
-    }
-
-    setDishIsFavourite(dishId) {
-        console.log("Set isFavourite for dish " + dishId);
-        return this.apiClient.put('dishes/' + dishId + '/fav');
-    }
-
-    getDishIsFavourite(dishId) {
-        console.log("Get isFavourite for dish " + dishId);
-        return this.apiClient.get('dishes/' + dishId + '/fav');
-    }
-
-    deleteBoard(boardId) {
-        console.log("Delete board " + boardId);
-        return this.apiClient.delete('boards/' + boardId + '/fav');
-    }
-
-    getBoard(boardId) {
-        console.log('Get board by id ' + boardId);
-        return this.apiClient.get('boards/' + boardId)
-    }
-
-    getAllDishes() {
-        console.log('Get all dishes');
-        return this.apiClient.get('dishes/');
-    }
-
-    getDishById(dishId) {
-        console.log('Get dish by id: ' + dishId);
-        return this.apiClient.get('dishes/' + dishId);
-    }
-
-    addDishOnBoard(boardId, dishId) {
-        console.log('Add dish ' + dishId + ' on the board ' + boardId);
-        return this.apiClient.post('boards/' + boardId + '/dishes/' + dishId);
-    }
-
-    deleteDishFromBoard(boardId, dishId) {
-        console.log('Delete dish ' + dishId + ' from the board ' + boardId);
-        return this.apiClient.delete('boards/' + boardId + '/dishes/' + dishId);
-    }
-
-    createBoard(name, userId) {
-        console.log('Create new board' + name);
-        return this.apiClient.post('boards/', {
-            name,
-            userId
-        });
+    nullValues(strategy, datasetId, cols, minNonNullValue, value) {
+        let url = 'data/transformation/' + datasetId + '/missing-data';
+        switch (strategy) {
+            case strategies.DROP.ANY:
+                url += '/drop?columns=' + cols + '&how=any';
+                break;
+            case strategies.DROP.ALL:
+                url += '/drop?columns=' + cols + '&how=all';
+                break;
+            case strategies.DROP.MIN_NON_NULL:
+                if (minNonNullValue != null) {
+                    url += '&minNonNull=' + minNonNullValue;
+                }
+                break;
+            case strategies.FILL.MEDIAN:
+                url += '/fill?columns=' + cols + '&strategy=median';
+                break;
+            case strategies.FILL.MEAN:
+                url += '/fill?columns=' + cols + '&strategy=mean';
+                break;
+            case strategies.FILL.CUSTOM_VALUE:
+                url += '/fill?columns=' + cols + '&fillValue=' + value;
+                break;
+            case strategies.NONE:
+            default:
+                console.log("Unexpected error.");
+                url = "";
+        }
+        console.log(url);
+        return this.apiClient.postWithoutBody(url);
     }
 }

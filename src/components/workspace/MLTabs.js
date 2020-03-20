@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UploadData from "../steps/transform/UploadData";
-import MissingValue from "../steps/transform/MissingValue";
+import MissingValues from "../steps/transform/MissingValues";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -71,7 +71,7 @@ const tabs = [
     ]
 ];
 
-const tabsContent = [[<UploadData/>, <MissingValue/>], [<UploadData/>]];
+const tabsContent = [[<UploadData/>, <MissingValues/>], [<UploadData/>]];
 
 export default function MLTabs(props) {
     const classes = useStyles();
