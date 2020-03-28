@@ -4,73 +4,88 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
-import CardOptions from "./CardOptions";
+import cx from "clsx";
+import BrandCardHeader from "@mui-treasury/components/cardHeader/brand";
+import image from "../../static/images/ml.png";
+import TextInfoContent from "@mui-treasury/components/content/textInfo";
+import {useN03TextInfoContentStyles} from "@mui-treasury/styles/textInfoContent/n03";
+import {useLightTopShadowStyles} from "@mui-treasury/styles/shadow/lightTop";
+import Chip from "@material-ui/core/Chip";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 275,
-    },
-    cardTitle: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginRight: -15
-    },
-    options: {
-        position: 'relative',
-        right: -2,
-        top: -7
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+        width: 300,
+        borderRadius: 10,
     },
     title: {
-        fontSize: 24,
-    },
-    pos: {
-        marginBottom: 12,
+        fontSize: 12,
     },
     icon: {
-        color: '#2EA155'
+        color: '#2EA155',
+        fontSize: 28,
+        paddingBottom: 3
     },
     createdBy: {
-        fontSize: 12,
-        fontStyle: 'italic',
-        flexGrow: 1,
-        textAlign: "end",
-        paddingTop: 6
+        fontSize: 16,
+        fontFamily: 'Muli',
+        fontStyle: "bold",
+    },
+    actions: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'
     }
-});
+}));
 
 export default function ModelCard(props) {
-    const classes = useStyles();
+    const styles = useN03TextInfoContentStyles();
+    const shadowStyles = useLightTopShadowStyles();
+    const cardStyles = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardContent>
-                <div className={classes.cardTitle}>
-                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {props.card.title}
-                    </Typography>
-                    <div className={classes.options}>
-                        <CardOptions/>
-                    </div>
-                </div>
-                <Typography variant="body2" component="p">
-                    {props.card.description}
-                </Typography>
+        <Card className={cx(cardStyles.root, shadowStyles.root)}>
+            <BrandCardHeader
+                image={image}
+                extra={
+                    <Chip size="small" variant="outlined" color="secondary" className={cardStyles.title} label={props.card.modelType}/>
+                }
+            />
+            <CardContent className={cardStyles.content}>
+                <TextInfoContent
+                    classes={styles}
+                    overline={props.card.createdAt}
+                    heading={props.card.title}
+                    body={props.card.description}
+                />
             </CardContent>
-            <CardActions disableSpacing>
-                <PlayCircleOutlineIcon className={classes.icon}/>
-                <Button size="small">RUN</Button>
-                <Typography className={classes.createdBy} color="textSecondary" gutterBottom>
-                    {props.card.createdAt} by {props.card.user.username}
-                </Typography>
+            <CardActions disableSpacing className={cardStyles.actions}>
+                <PlayCircleOutlineIcon className={cardStyles.icon}/>
+                <Button size="small" className={cardStyles.createdBy}>RUN</Button>
             </CardActions>
         </Card>
+        /*  <Card className={classes.root}>
+              <CardContent>
+                  <div className={classes.cardTitle}>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                          {props.card.title}
+                      </Typography>
+                      <div className={classes.options}>
+                          <CardOptions/>
+                      </div>
+                  </div>
+                  <Typography variant="body2" component="p">
+                      {props.card.description}
+                  </Typography>
+              </CardContent>
+              <CardActions disableSpacing>
+                  <PlayCircleOutlineIcon className={classes.icon}/>
+                  <Button size="small">RUN</Button>
+                  <Typography className={classes.createdBy} color="textSecondary" gutterBottom>
+                      {props.card.createdAt} by {props.card.user.username}
+                  </Typography>
+              </CardActions>
+          </Card>*/
     )
 }

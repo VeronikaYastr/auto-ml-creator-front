@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 
-import App from "./App"
+import Projects from "./Projects"
+import MenuComponent from "./MenuComponent"
 import Workspace from "./Workspace";
+import Datasets from "./Datasets";
 
 class Navigator extends Component {
     render() {
@@ -10,11 +12,12 @@ class Navigator extends Component {
 
         return (
             <div className="Navigator">
-                <Switch>
-                    <Route history={history} path='/home' component={App}/>
-                    <Route history={history} path='/add' component={Workspace}/>
-                    <Redirect from='/' to='/add'/>
-                </Switch>
+                <Route history={history} path='/home' component={Projects}/>
+                <Route history={history} path='/test' component={MenuComponent}/>
+                <Route history={history} path='/addDataset' component={Workspace}/>
+                <Route history={history} path='/addProject' component={Workspace}/>
+                <Route history={history} path='/datasets' component={Datasets}/>
+                <Redirect from='/' to='/home'/>
             </div>
         );
     }

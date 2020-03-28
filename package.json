@@ -5,16 +5,20 @@
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.45",
+    "@mui-treasury/components": "^1.0.0",
+    "@mui-treasury/styling": "latest",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
+    "clsx": "latest",
     "history": "latest",
     "prop-types": "latest",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-scrollbar": "^0.5.6"
+    "react-scrollbar": "^0.5.6",
+    "@mui-treasury/styles": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

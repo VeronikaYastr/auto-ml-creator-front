@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 
-import { Router } from "react-router-dom"
+import {Router} from "react-router-dom"
 import {createBrowserHistory} from 'history'
 
 import Navigator from './containers/Navigator'
@@ -18,6 +18,7 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: '#890620',
+            light: '#892D39'
         },
         success: {
             main: '#2EA155',
@@ -29,11 +30,11 @@ const theme = createMuiTheme({
 const history = createBrowserHistory();
 
 ReactDOM.render((
-    <ThemeProvider theme={theme}>
-        <MenuComponent/>
-        <Router history={history}>
-            <Navigator/>
-        </Router>
-    </ThemeProvider>
+        <ThemeProvider theme={theme}>
+            <Router history={history}>
+                <MenuComponent/>
+                <Navigator/>
+            </Router>
+        </ThemeProvider>
     ), document.getElementById('root')
 );
