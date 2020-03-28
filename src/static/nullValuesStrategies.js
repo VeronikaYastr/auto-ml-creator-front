@@ -16,8 +16,8 @@ const allValues = [
     strategies.DROP.ALL,
     strategies.DROP.ANY,
     strategies.DROP.MIN_NON_NULL,
-    strategies.FILL.MEAN,
     strategies.FILL.MEDIAN,
+    strategies.FILL.MEAN,
     strategies.FILL.CUSTOM_VALUE,
     strategies.NONE
 ];

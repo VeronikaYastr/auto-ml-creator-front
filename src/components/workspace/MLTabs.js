@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import UploadData from "../steps/transform/UploadData";
 import MissingValues from "../steps/transform/MissingValues";
+import Outliers from "../steps/transform/Outliers";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -43,7 +44,6 @@ const useStyles = makeStyles(theme => ({
         flex: 1,
         backgroundColor: theme.palette.background.paper,
         display: 'flex',
-        //height: 400,
     },
     tabs: {
         borderRight: `1px solid ${theme.palette.divider}`,
@@ -71,7 +71,7 @@ const tabs = [
     ]
 ];
 
-const tabsContent = [[<UploadData/>, <MissingValues/>], [<UploadData/>]];
+const tabsContent = [[<UploadData/>, <MissingValues/>, <Outliers/>, <Outliers/>], [<UploadData/>]];
 
 export default function MLTabs(props) {
     const classes = useStyles();
@@ -104,10 +104,10 @@ export default function MLTabs(props) {
                     {tabsContent[props.index][1]}
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    Item Three
+                    {tabsContent[props.index][2]}
                 </TabPanel>
-                <TabPanel value={value} index={2}>
-                    Item Four
+                <TabPanel value={value} index={3}>
+                    {tabsContent[props.index][3]}
                 </TabPanel>
             </div>
         </div>

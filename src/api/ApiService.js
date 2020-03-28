@@ -1,5 +1,6 @@
 import {ApiClient} from './ApiClient';
 import {strategies} from "../static/nullValuesStrategies";
+import {outliersHandlingStrategies, outliersCalculatingStrategies} from "../static/outliersStrategies";
 
 /** A wrapper class to construct, send and handle server queries. */
 export class ApiService {
@@ -25,45 +26,61 @@ export class ApiService {
         return this.apiClient.post('files/upload/', file);
     }
 
-    dropValues(datasetId, cols, how, minNonNullValue) {
-        let url = 'data/transformation//missing-data' + datasetId + '/drop?columns=' + cols;
-        if (how != null) {
-            url += '&how=' + how;
-        }
-        if (minNonNullValue != null) {
-            url += '&minNonNull=' + minNonNullValue;
-        }
-        return this.apiClient.postWithoutBody(url);
-    }
-
     nullValues(strategy, datasetId, cols, minNonNullValue, value) {
         let url = 'data/transformation/' + datasetId + '/missing-data';
         switch (strategy) {
             case strategies.DROP.ANY:
-                url += '/drop?columns=' + cols + '&how=any';
+                url += '/drop?columns=' + cols + '&strategy=ANY';
                 break;
             case strategies.DROP.ALL:
-                url += '/drop?columns=' + cols + '&how=all';
+                url += '/drop?columns=' + cols + '&strategy=ALL';
                 break;
             case strategies.DROP.MIN_NON_NULL:
                 if (minNonNullValue != null) {
-                    url += '&minNonNull=' + minNonNullValue;
+                    url += '/drop?columns=' + cols + '&minNonNull=' + minNonNullValue + '&strategy=MIN_NON_NULL';
                 }
                 break;
             case strategies.FILL.MEDIAN:
-                url += '/fill?columns=' + cols + '&strategy=median';
+                url += '/fill?columns=' + cols + '&strategy=MEDIAN';
                 break;
             case strategies.FILL.MEAN:
-                url += '/fill?columns=' + cols + '&strategy=mean';
+                url += '/fill?columns=' + cols + '&strategy=MEAN';
                 break;
             case strategies.FILL.CUSTOM_VALUE:
-                url += '/fill?columns=' + cols + '&fillValue=' + value;
+                url += '/fill?columns=' + cols + '&fillValue=' + value + '&strategy=CUSTOM_VALUE';
                 break;
             case strategies.NONE:
             default:
                 console.log("Unexpected error.");
                 url = "";
         }
+        console.log(url);
+        return this.apiClient.postWithoutBody(url);
+    }
+
+    outliers(datasetId, cols, handlingStrategy, calculatingStrategy) {
+        let url = "data/transformation/" + datasetId + '/outliers';
+        if (calculatingStrategy === outliersCalculatingStrategies.Z_SCORES) {
+            url += '?calculatingStrategy=Z_SCORES';
+        } else {
+            url += '?calculatingStrategy=APPROX_QUANTILE';
+        }
+
+        switch (handlingStrategy) {
+            case outliersHandlingStrategies.DROP:
+                url += '&handlingStrategy=DROP';
+                break;
+            case outliersHandlingStrategies.REPLACE.MEAN:
+                url += '&handlingStrategy=REPLACE_BY_MEAN';
+                break;
+            case outliersHandlingStrategies.REPLACE.MEDIAN:
+                url += '&handlingStrategy=REPLACE_BY_MEDIAN';
+                break;
+            default:
+                url += '&handlingStrategy=UNKNOWN';
+                break;
+        }
+
         console.log(url);
         return this.apiClient.postWithoutBody(url);
     }
