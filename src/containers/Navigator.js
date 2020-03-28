@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Redirect, Route, withRouter} from "react-router-dom";
 
 import Projects from "./Projects"
-import MenuComponent from "./MenuComponent"
 import Workspace from "./Workspace";
 import Datasets from "./Datasets";
+import Pipelines from "./Pipelines";
 
 class Navigator extends Component {
     render() {
@@ -13,9 +13,10 @@ class Navigator extends Component {
         return (
             <div className="Navigator">
                 <Route history={history} path='/home' component={Projects}/>
-                <Route history={history} path='/test' component={MenuComponent}/>
                 <Route history={history} path='/addDataset' component={Workspace}/>
                 <Route history={history} path='/addProject' component={Workspace}/>
+                <Route history={history} path='/addPipeline' component={Workspace}/>
+                <Route history={history} path='/pipelines' component={Pipelines}/>
                 <Route history={history} path='/datasets' component={Datasets}/>
                 <Redirect from='/' to='/home'/>
             </div>
