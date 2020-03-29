@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 const Datasets = () => {
     const classes = useStyles();
     const [datasets, setDatasets] = useState([]);
-    const [loading, setLoading] = useState(true); //TODO: true
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         new ApiService().getAllDatasetsForUser(1)

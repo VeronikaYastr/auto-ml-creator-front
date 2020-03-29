@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 const Pipelines = () => {
     const classes = useStyles();
     const [pipelines, setPipelines] = useState([]);
-    const [loading, setLoading] = useState(true); //TODO: true
+    const [loading, setLoading] = useState(true);
 
      useEffect(() => {
          new ApiService().getAllPipelinesForUser(1)

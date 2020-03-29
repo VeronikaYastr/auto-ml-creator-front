@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 const Projects = () => {
     const classes = useStyles();
     const [models, setModels] = useState([]);
-    const [loading, setLoading] = useState(true); //TODO: true
+    const [loading, setLoading] = useState(true);
 
      useEffect(() => {
          new ApiService().getAllModelsForUser(1)

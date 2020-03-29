@@ -3,10 +3,10 @@ import {makeStyles} from "@material-ui/core/styles";
 import MLStepper from "../components/workspace/MLStepper";
 import ScrollArea from "react-scrollbar";
 import {green} from '@material-ui/core/colors';
-import UploadData from "../components/steps/transform/UploadData";
-import MissingValues from "../components/steps/transform/MissingValues";
-import Outliers from "../components/steps/transform/Outliers";
-import SaveDataset from "../components/steps/transform/SaveDataset";
+import UploadData from "../components/steps/newDataset/UploadData";
+import MissingValues from "../components/steps/newDataset/MissingValues";
+import Outliers from "../components/steps/newDataset/Outliers";
+import SaveDataset from "../components/steps/newDataset/SaveDataset";
 
 const useStyles = makeStyles(theme => ({
     root: {

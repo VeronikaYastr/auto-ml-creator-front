@@ -5,9 +5,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import UploadData from "../steps/transform/UploadData";
-import MissingValues from "../steps/transform/MissingValues";
-import Outliers from "../steps/transform/Outliers";
+import UploadData from "../steps/newDataset/UploadData";
+import MissingValues from "../steps/newDataset/MissingValues";
+import Outliers from "../steps/newDataset/Outliers";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
