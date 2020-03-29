@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from "@material-ui/core/Typography";
 import "../index.css";
 import PipelinesContainer from "./PipelinesContainer";
+import {ApiService} from "../api/ApiService";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,28 +37,23 @@ const useStyles = makeStyles(theme => ({
 
 const Pipelines = () => {
     const classes = useStyles();
-    const [pipelines, setPipelines] = useState([{
-        "id": "heyhey",
-        "title": "testPipeline",
-        "description": "pipeline with some stages",
-        "createdAt": "2020-03-20",
-    }]);
-    const [loading, setLoading] = useState(false); //TODO: true
+    const [pipelines, setPipelines] = useState([]);
+    const [loading, setLoading] = useState(true); //TODO: true
 
-    /* useEffect(() => {
-         new ApiService().getAllModelsForUser(1)
+     useEffect(() => {
+         new ApiService().getAllPipelinesForUser(1)
              .then((response) => {
                  if (response === undefined || response.errors) {
                      console.log("Received error from server.");
-                     setDatasets([]);
+                     setPipelines([]);
                  } else
-                     setDatasets(response);
+                     setPipelines(response);
                  setLoading(false);
              }).catch((error) => {
              console.log("Unexpected error.");
              setLoading(false);
          });
-     }, []);*/
+     }, []);
 
     return (
         <div className={classes.root}>

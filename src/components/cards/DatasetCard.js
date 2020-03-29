@@ -61,14 +61,14 @@ export default function DatasetCard(props) {
             <BrandCardHeader
                 image={image}
                 extra={
-                    <Chip size="small" variant="outlined" color="secondary" className={cardStyles.title} label={props.card.fileType}/>
+                    <Chip size="small" variant="outlined" color="secondary" className={cardStyles.title} label={props.card.fileFormat}/>
                 }
             />
             <CardContent className={cardStyles.content}>
                 <TextInfoContent
                     classes={styles}
                     overline={props.card.createdAt}
-                    heading={props.card.title}
+                    heading={props.card.name}
                     body={props.card.description}
                 />
             </CardContent>

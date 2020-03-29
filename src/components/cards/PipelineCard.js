@@ -26,12 +26,13 @@ export default function PipelineCard(props) {
         <Card className={cx(cardStyles.root, shadowStyles.root)}>
             <BrandCardHeader
                 image={image}
+                extra={props.card.stepsAmount + " steps"}
             />
             <CardContent className={cardStyles.content}>
                 <TextInfoContent
                     classes={styles}
                     overline={props.card.createdAt}
-                    heading={props.card.title}
+                    heading={props.card.name}
                     body={props.card.description}
                 />
             </CardContent>

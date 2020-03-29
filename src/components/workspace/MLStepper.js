@@ -3,9 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import MLTabs from "./MLTabs";
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,31 +31,28 @@ const useStyles = makeStyles(theme => ({
         color: '#575757',
         flex: 1
     },
+    stepContent: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        display: 'flex'
+    },
+    buttonNext: {
+        right: 30,
+        bottom: 20,
+        position: "fixed"
+    },
+    buttonBack: {
+        left: 30,
+        bottom: 20,
+        position: "fixed",
+    },
 }));
 
-function getSteps() {
-    return ['Transform data', 'Choose model', 'Score model', 'Evaluate model'];
-}
-
-function getStepContent(stepIndex) {
-    switch (stepIndex) {
-        case 0:
-            return 'Transform data';
-        case 1:
-            return 'Choose model';
-        case 2:
-            return 'Score model';
-        case 3:
-            return 'Evaluate model';
-        default:
-            return 'Unknown stepIndex';
-    }
-}
-
-export default function MLStepper() {
+export default function MLStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
+    const steps = props.steps;
 
     const handleNext = () => {
         setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -67,7 +64,9 @@ export default function MLStepper() {
 
     return (
         <div className={classes.root}>
-            <MLTabs index={activeStep}/>
+            <div className={classes.stepContent}>
+                {props.getStepContent(activeStep)}
+            </div>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map(label => (
                     <Step key={label}>
@@ -75,7 +74,7 @@ export default function MLStepper() {
                     </Step>
                 ))}
             </Stepper>
-            <div>
+            {/*   <div>
                 {activeStep === steps.length ? (
                     <div className={classes.mainContainer}>
                         <Typography className={classes.instructions}>All steps completed</Typography>
@@ -86,7 +85,7 @@ export default function MLStepper() {
                             <Button
                                 disabled={activeStep === 0}
                                 onClick={handleBack}
-                                color = 'secondary'
+                                color='secondary'
                                 className={classes.backButton}
                             >
                                 Back
@@ -97,6 +96,16 @@ export default function MLStepper() {
                         </div>
                     </div>
                 )}
+            </div>*/}
+            <div>
+                <Fab disabled={activeStep === steps.length} color="secondary" aria-label="next"
+                     className={classes.buttonNext} onClick={handleNext}>
+                    <NavigateNextIcon/>
+                </Fab>
+                <Fab color="secondary" aria-label="next" className={classes.buttonBack} disabled={activeStep === 0}
+                     onClick={handleBack}>
+                    <NavigateBeforeIcon/>
+                </Fab>
             </div>
         </div>
     );

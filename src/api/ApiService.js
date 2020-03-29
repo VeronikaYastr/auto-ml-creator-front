@@ -1,6 +1,6 @@
 import {ApiClient} from './ApiClient';
 import {strategies} from "../static/nullValuesStrategies";
-import {outliersHandlingStrategies, outliersCalculatingStrategies} from "../static/outliersStrategies";
+import {outliersCalculatingStrategies, outliersHandlingStrategies} from "../static/outliersStrategies";
 
 /** A wrapper class to construct, send and handle server queries. */
 export class ApiService {
@@ -21,9 +21,38 @@ export class ApiService {
         return this.apiClient.get('ml-models/' + userId);
     }
 
+    getAllDatasetsForUser(userId) {
+        console.log("Request all ml datasets for user");
+        return this.apiClient.get('ml-datasets/' + userId);
+    }
+
+    getAllPipelinesForUser(userId) {
+        console.log("Request all ml pipelines for user");
+        return this.apiClient.get('pipelines/' + userId);
+    }
+
+    createDataset(userId, datasetId, name, description) {
+        return this.apiClient.post('ml-datasets/' + userId, {
+            "id": datasetId,
+            name,
+            description
+        })
+    }
+
+    createPipeline(userId, datasetId, name, description) {
+        return this.apiClient.post('pipelines/' + datasetId, {
+            userId,
+            name,
+            description
+        })
+    }
+
+    loadStages(datasetId, stages) {
+        return this.apiClient.postWithoutBody('pipelines/' + datasetId + '?stages=' + stages)
+    }
+
     uploadFile(file) {
-        console.log("Upload file.");
-        return this.apiClient.post('files/upload/', file);
+        return this.apiClient.postFile('files/upload/', file);
     }
 
     nullValues(strategy, datasetId, cols, minNonNullValue, value) {

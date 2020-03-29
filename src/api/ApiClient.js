@@ -1,7 +1,7 @@
 /** A base class to send queries to the backend. */
 export class ApiClient {
 
-    HOST = 'http://192.168.100.2:9090/auto-ml-creator/v1/';
+    HOST = 'http://192.168.100.7:9090/auto-ml-creator/v1/';
 
     get(url) {
         console.log('Sending GET request ' + this.HOST + url);
@@ -15,6 +15,21 @@ export class ApiClient {
     }
 
     post(url, body) {
+        console.log('Sending POST request ' + this.HOST + url);
+        return fetch(this.HOST + url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+        })
+            .then(response => response.json())
+            .catch((error) => {
+                console.log('Problems with POST method: ' + error.message)
+            });
+    }
+
+    postFile(url, body) {
         console.log('Sending POST request ' + this.HOST + url);
         return fetch(this.HOST + url, {
             method: 'POST',

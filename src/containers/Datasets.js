@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from "@material-ui/core/Typography";
 import "../index.css";
 import DatasetsContainer from "./DatasetsContainer";
+import {ApiService} from "../api/ApiService";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,32 +37,23 @@ const useStyles = makeStyles(theme => ({
 
 const Datasets = () => {
     const classes = useStyles();
-    const [datasets, setDatasets] = useState([{
-        "id": "heyhey",
-        "title": "testDataset",
-        "description": "dataset with some images",
-        "createdAt": "2020-03-20",
-        "fileType": "CSV",
-        "user": {
-            "username": "testUsername"
-        },
-    }]);
-    const [loading, setLoading] = useState(false); //TODO: true
+    const [datasets, setDatasets] = useState([]);
+    const [loading, setLoading] = useState(true); //TODO: true
 
-    /* useEffect(() => {
-         new ApiService().getAllModelsForUser(1)
-             .then((response) => {
-                 if (response === undefined || response.errors) {
-                     console.log("Received error from server.");
-                     setDatasets([]);
-                 } else
-                     setDatasets(response);
-                 setLoading(false);
-             }).catch((error) => {
-             console.log("Unexpected error.");
-             setLoading(false);
-         });
-     }, []);*/
+    useEffect(() => {
+        new ApiService().getAllDatasetsForUser(1)
+            .then((response) => {
+                if (response === undefined || response.errors) {
+                    console.log("Received error from server.");
+                    setDatasets([]);
+                } else
+                    setDatasets(response);
+                setLoading(false);
+            }).catch((error) => {
+            console.log("Unexpected error.");
+            setLoading(false);
+        });
+    }, []);
 
     return (
         <div className={classes.root}>

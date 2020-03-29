@@ -49,7 +49,7 @@ export default function ModelCard(props) {
             <BrandCardHeader
                 image={image}
                 extra={
-                    <Chip size="small" variant="outlined" color="secondary" className={cardStyles.title} label={props.card.modelType}/>
+                    <Chip size="small" variant="outlined" color="secondary" className={cardStyles.title} label={props.card.mlModelType}/>
                 }
             />
             <CardContent className={cardStyles.content}>

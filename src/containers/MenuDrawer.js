@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {Link as RouterLink} from 'react-router-dom';
 import {makeStyles} from "@material-ui/core/styles";
 import pipelineImage from "../static/images/pipeline.png";
-import datasetImage from "../static/images/dataset.jpg";
+import datasetImage from "../static/images/dataset.png";
 import homeImage from "../static/images/ml.png";
 
 const useStyles = makeStyles({
