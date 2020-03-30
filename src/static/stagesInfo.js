@@ -2,6 +2,7 @@ import titles from "./text";
 import React from "react";
 import Normalizer from "../components/steps/stages/normalization/Normalizer";
 import {functions} from "./stagesFunctions";
+import StandardScaler from "../components/steps/stages/normalization/StandardScaler";
 
 const normalizationStages = [{
     "title": "Normalizer",
@@ -20,9 +21,9 @@ const normalizationStages = [{
         "dialog": {
             "title": "Standard Scaler",
             "contentText": "Customize settings for Standard Scaler component.",
-            "content": <Normalizer/>,
-            "onSaveClick": functions.normalizerOnSave,
-            "onCancelClick": functions.normalizerOnCancel
+            "content": <StandardScaler/>,
+            "onSaveClick": functions.stScalerOnSave,
+            "onCancelClick": functions.stScalerOnCancel
         }
     },
     {

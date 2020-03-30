@@ -9,12 +9,39 @@ const normalizerOnSave = () => {
 };
 
 const normalizerOnCancel = () => {
+    localStorage.removeItem("inputColumn");
+    localStorage.removeItem("outputColumn");
+    localStorage.removeItem("norm");
     removeStage(1);
+};
+
+const stScalerOnSave = () => {
+    const inputColumn = localStorage.getItem("inputColumn");
+    const outputColumn = localStorage.getItem("outputColumn");
+    let withStd = localStorage.getItem("withStd");
+    withStd = withStd === null ? false : withStd;
+    let withMean = localStorage.getItem("withMean");
+    withMean = withMean === null ? false : withMean;
+    addStage({"id": 2, inputColumn, outputColumn, withStd, withMean});
+    localStorage.removeItem("inputColumn");
+    localStorage.removeItem("outputColumn");
+    localStorage.removeItem("withStd");
+    localStorage.removeItem("withMean");
+};
+
+const stScalerOnCancel = () => {
+    localStorage.removeItem("inputColumn");
+    localStorage.removeItem("outputColumn");
+    localStorage.removeItem("withStd");
+    localStorage.removeItem("withMean");
+    removeStage(2);
 };
 
 export const functions = {
     normalizerOnSave,
-    normalizerOnCancel
+    normalizerOnCancel,
+    stScalerOnCancel,
+    stScalerOnSave
 };
 
 const addStage = (stage) => {
