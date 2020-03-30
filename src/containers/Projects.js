@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2),
         color: '#575757',
         fontFamily: 'Muli',
-        fontStyle: "bold"
+        fontStyle: "bold",
+        fontWeight: 700,
     },
 }));
 

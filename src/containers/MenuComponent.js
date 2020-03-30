@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     navTitle: {
         flexGrow: 1,
         fontFamily: 'Muli',
-        fontStyle: "bold"
+        fontStyle: "bold",
+        fontWeight: 600,
     },
     list: {
         width: 250,

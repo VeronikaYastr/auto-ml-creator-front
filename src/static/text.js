@@ -10,5 +10,6 @@ const titles = {
     outliersTitle: 'Outliers are extreme values that deviate from other observations on data. You can detect it with ZScores or IQR approach and then drop them or replace by mean or median value of column.',
     zScoresStrategy: 'The Z-score, or standard score, is a way of describing a data point in terms of its relationship to the mean and standard deviation of a group of points.',
     approxQuantileStrategy: 'Interquartile range (IQR) is a measure of statistical dispersion, being equal to the difference between 75th and 25th percentiles, or between upper and lower quartiles, IQR = Q3 −  Q1.',
+    normalizerDescription: 'Normalizer is a Transformer which transforms a dataset of Vector rows, normalizing each Vector to have unit norm. This normalization can help standardize your input data and improve the behavior of learning algorithms.',
 };
 export default titles;

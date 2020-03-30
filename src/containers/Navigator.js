@@ -6,6 +6,7 @@ import Workspace from "./Workspace";
 import Datasets from "./Datasets";
 import Pipelines from "./Pipelines";
 import NewDataset from "./NewDataset";
+import NewPipeline from "./NewPipeline";
 
 class Navigator extends Component {
     render() {
@@ -16,10 +17,10 @@ class Navigator extends Component {
                 <Route history={history} path='/home' component={Projects}/>
                 <Route history={history} path='/addDataset' component={NewDataset}/>
                 <Route history={history} path='/addProject' component={Workspace}/>
-                <Route history={history} path='/addPipeline' component={Workspace}/>
+                <Route history={history} path='/addPipeline' component={NewPipeline}/>
                 <Route history={history} path='/pipelines' component={Pipelines}/>
                 <Route history={history} path='/datasets' component={Datasets}/>
-                <Redirect from='/' to='/home'/>
+                <Redirect from='/' to='/addPipeline'/>
             </div>
         );
     }
