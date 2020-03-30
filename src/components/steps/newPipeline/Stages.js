@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {makeStyles} from "@material-ui/core/styles";
-import titles from "../../../static/text";
+import normalizationStages from "../../../static/stagesInfo";
 import StagesContainer from "../../../containers/StagesContainer";
 import TreeComponent from "./TreeComponent";
 import {grey} from "@material-ui/core/colors";
@@ -36,39 +36,11 @@ const useStyles = makeStyles(theme => ({
 export default function Stages() {
     const classes = useStyles();
     const [selectedGroup, setSelectedGroup] = React.useState(0);
-    const normalizationCards = [{
-        "title": "Normalizer", "description": titles.normalizerDescription, "dialog": {
-            "title": "Normalizer",
-            "contentText": "Customize settings for Normalize component.",
-            "content": <div>Hi</div>
-        }
-    },
-        {
-            "title": "Standard Scaler", "description": titles.normalizerDescription, "dialog": {
-                "title": "Standard Scaler",
-                "contentText": "Customize settings for Standard Scaler component.",
-                "content": <div>Hu</div>
-            }
-        },
-        {
-            "title": "Max abs Scaler", "description": titles.normalizerDescription, "dialog": {
-                "title": "Max abs Scaler",
-                "contentText": "Customize settings for MaxAbsScaler component.",
-                "content": <div>Ho</div>
-            }
-        },
-        {
-            "title": "Min max Scaler", "description": titles.normalizerDescription, "dialog": {
-                "title": "Min max Scaler",
-                "contentText": "Customize settings for MinMaxScaler component.",
-                "content": <div>Hey</div>
-            }
-        }];
 
     const getContent = () => {
         switch (selectedGroup) {
             case 0:
-                return <StagesContainer cards={normalizationCards}/>;
+                return <StagesContainer cards={normalizationStages}/>;
             case 1:
                 return <TreeComponent/>;
             default:
@@ -76,16 +48,20 @@ export default function Stages() {
         }
     };
 
-    const onClickText = () => {
+    const onClickExtractors = () => {
         setSelectedGroup(0);
     };
 
-    const onClickNormalization = () => {
+    const onClickText = () => {
         setSelectedGroup(1);
     };
 
-    const onClickCategoricalEncoding = () => {
+    const onClickColumnTransformers = () => {
         setSelectedGroup(2);
+    };
+
+    const onClickCategoricalEncoding = () => {
+        setSelectedGroup(3);
     };
 
     return (
@@ -94,13 +70,16 @@ export default function Stages() {
                 <ButtonGroup variant="text" aria-label="Select stages">
                     <Button className={selectedGroup === 0 ? classes.selectedButtonText : classes.buttonText}
                             color={selectedGroup === 0 ? "primary" : "secondary"}
+                            onClick={onClickExtractors}>Extractors</Button>
+                    <Button className={selectedGroup === 1 ? classes.selectedButtonText : classes.buttonText}
+                            color={selectedGroup === 1 ? "primary" : "secondary"}
                             onClick={onClickText}>Text
                         transformers</Button>
-                    <Button className={selectedGroup === 1 ? classes.selectedButtonText : classes.buttonText}
-                            color={selectedGroup === 1 ? "primary" : "textSecondary"}
-                            onClick={onClickNormalization}>Normalization</Button>
                     <Button className={selectedGroup === 2 ? classes.selectedButtonText : classes.buttonText}
                             color={selectedGroup === 2 ? "primary" : "textSecondary"}
+                            onClick={onClickColumnTransformers}>Columns transformers</Button>
+                    <Button className={selectedGroup === 3 ? classes.selectedButtonText : classes.buttonText}
+                            color={selectedGroup === 3 ? "primary" : "textSecondary"}
                             onClick={onClickCategoricalEncoding}>Categorical
                         encoding</Button>
                 </ButtonGroup>

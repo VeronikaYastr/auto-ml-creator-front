@@ -22,7 +22,8 @@ function StagesContainer(props) {
                 <Grid container justify="flex-start" spacing={spacing}>
                     {props.cards.map(card => (
                         <Grid key={card.id} item>
-                            <StageCard dialogTitle={card.dialog.title} dialogContentText={card.dialog.contentText}
+                            <StageCard onCancelClick={card.dialog.onCancelClick} onSaveClick={card.dialog.onSaveClick}
+                                       dialogTitle={card.dialog.title} dialogContentText={card.dialog.contentText}
                                        dialogContent={card.dialog.content} card={card}/>
                         </Grid>
                     ))}

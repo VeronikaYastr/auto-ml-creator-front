@@ -62,26 +62,18 @@ export default function StageCard(props) {
     const shadowStyles = useLightTopShadowStyles();
     const cardStyles = useStyles();
     const [selected, setSelected] = React.useState(false);
-    const [inputColumn, setInputColumn] = React.useState(false);
-    const [outputColumn, setOutputColumn] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
     const handleCancel = () => {
         setOpen(false);
         setSelected(false);
+        props.onCancelClick();
     };
 
     const handleOk = () => {
         setOpen(false);
         setSelected(true);
-    };
-
-    const handleInputColumnChange = event => {
-        setInputColumn(event.target.value);
-    };
-
-    const handleOutputColumnChange = event => {
-        setOutputColumn(event.target.value);
+        props.onSaveClick();
     };
 
     const onClick = () => {
@@ -90,6 +82,7 @@ export default function StageCard(props) {
 
     const onCheckedClick = () => {
         setSelected(false);
+        props.onCancelClick();
     };
 
     return (
