@@ -15,30 +15,36 @@ const normalizationStages = [{
     }
 },
     {
-        "title": "Standard Scaler",
-        "description": titles.normalizerDescription,
+        "title": "StandardScaler",
+        "description": titles.stScalerDescription,
         "dialog": {
             "title": "Standard Scaler",
             "contentText": "Customize settings for Standard Scaler component.",
-            "content": <div>Hu</div>
+            "content": <Normalizer/>,
+            "onSaveClick": functions.normalizerOnSave,
+            "onCancelClick": functions.normalizerOnCancel
         }
     },
     {
-        "title": "Max abs Scaler",
-        "description": titles.normalizerDescription,
+        "title": "MaxAbsScaler",
+        "description": titles.maxAbsScalerDescription,
         "dialog": {
             "title": "Max abs Scaler",
             "contentText": "Customize settings for MaxAbsScaler component.",
-            "content": <div>Ho</div>
+            "content": <Normalizer/>,
+            "onSaveClick": functions.normalizerOnSave,
+            "onCancelClick": functions.normalizerOnCancel
         }
     },
     {
-        "title": "Min max Scaler",
-        "description": titles.normalizerDescription,
+        "title": "MinMaxScaler",
+        "description": titles.minMaxScalerDescription,
         "dialog": {
             "title": "Min max Scaler",
             "contentText": "Customize settings for MinMaxScaler component.",
-            "content": <div>Hey</div>
+            "content": <Normalizer/>,
+            "onSaveClick": functions.normalizerOnSave,
+            "onCancelClick": functions.normalizerOnCancel
         }
     }];
 
