@@ -55,7 +55,7 @@ export default function Normalizer() {
     const [outputColumn, setOutputColumn] = React.useState('');
     const [selectedColumn, setSelectedColumn] = React.useState([]);
     const [norm, setNorm] = React.useState('');
-    const columns = JSON.parse(localStorage.getItem("columns"));
+    const columns = JSON.parse(localStorage.getItem("selectedDataset")).columns;
 
     const handleChangeMultiple = event => {
         localStorage.setItem("inputColumn", event.target.value);

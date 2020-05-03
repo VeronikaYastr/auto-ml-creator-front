@@ -62,7 +62,7 @@ const Pipelines = () => {
             </Typography>
             {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : pipelines &&
                 <PipelinesContainer cards={pipelines}/>}
-            <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/addPipeline">
+            <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/chooseDataset">
                 <AddIcon/>
             </Fab>
         </div>

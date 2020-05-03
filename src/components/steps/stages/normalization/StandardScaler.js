@@ -54,7 +54,7 @@ export default function StandardScaler() {
     const [selectedColumn, setSelectedColumn] = React.useState([]);
     const [withMean, setWithMean] = React.useState(false);
     const [withStd, setWithStd] = React.useState(false);
-    const columns = JSON.parse(localStorage.getItem("columns"));
+    const columns = JSON.parse(localStorage.getItem("selectedDataset")).columns;
 
     const handleChangeMultiple = event => {
         localStorage.setItem("inputColumn", event.target.value);

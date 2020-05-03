@@ -23,7 +23,10 @@ export class ApiClient {
             },
             body: JSON.stringify(body),
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                return response.json();
+            })
             .catch((error) => {
                 console.log('Problems with POST method: ' + error.message)
             });

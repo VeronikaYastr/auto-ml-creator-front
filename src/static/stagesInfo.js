@@ -1,8 +1,8 @@
-import titles from "./text";
 import React from "react";
 import Normalizer from "../components/steps/stages/normalization/Normalizer";
-import {functions} from "./stagesFunctions";
 import StandardScaler from "../components/steps/stages/normalization/StandardScaler";
+import {functions} from "./stagesFunctions";
+import titles from "./text";
 
 const normalizationStages = [{
     "title": "Normalizer",

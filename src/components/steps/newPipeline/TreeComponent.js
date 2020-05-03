@@ -17,19 +17,25 @@ const Dot = () => (
 
 const TreeComponent = () => {
     return (
-        <Tree length={24} gutter={16} outline={`1px solid #760B87`}>
-            <Tree.Trunk>
-                <Dot/>
-                <Tree.Branches>
-                    <Tree.Stem>
-                        <TreeNodeCard card={{"title": "Normalizer", "type": "normalization"}}/>
-                        <Tree.Branches>
-                            <Tree.Stem>
-                                <TreeNodeCard card={{"title": "StandardScaler", "type": "text transform"}}/>
-                            </Tree.Stem>
-                        </Tree.Branches>
-                    </Tree.Stem>
-                    {/*  <Tree.Twig>
+        <div style={{paddingTop: 20}}>
+            <Tree length={24} gutter={16} outline={`1px solid #760B87`}>
+                <Tree.Trunk>
+                    <Dot/>
+                    <Tree.Branches>
+                        <Tree.Stem>
+                            <TreeNodeCard card={{"title": "Normalizer", "type": "Amount"}}/>
+                            <Tree.Branches>
+                                <Tree.Stem>
+                                    <TreeNodeCard card={{"title": "StandardScaler", "type": "V2"}}/>
+                                    <Tree.Branches>
+                                        <Tree.Stem>
+                                            <TreeNodeCard card={{"title": "StandardScaler", "type": "V3"}}/>
+                                        </Tree.Stem>
+                                    </Tree.Branches>
+                                </Tree.Stem>
+                            </Tree.Branches>
+                        </Tree.Stem>
+                        {/*  <Tree.Twig>
                         <Tree.Stem>
                             <Typography variant="h4" color="inherit">
                                 Projects
@@ -92,9 +98,10 @@ const TreeComponent = () => {
                             </Tree.Twig>
                         </Tree.Branches>
                     </Tree.Twig>*/}
-                </Tree.Branches>
-            </Tree.Trunk>
-        </Tree>
+                    </Tree.Branches>
+                </Tree.Trunk>
+            </Tree>
+        </div>
     );
 };
 

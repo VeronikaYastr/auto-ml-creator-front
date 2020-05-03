@@ -36,7 +36,7 @@ export default function DataTable(props) {
     const classes = useStyles();
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} bodyStyle={{overflowX: 'auto'}}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>

@@ -48,7 +48,7 @@ export class ApiService {
     }
 
     loadStages(datasetId, stages) {
-        return this.apiClient.postWithoutBody('pipelines/' + datasetId + '?stages=' + stages)
+        return this.apiClient.post('pipelines/' + datasetId + '/stages', stages)
     }
 
     uploadFile(file) {
@@ -88,11 +88,11 @@ export class ApiService {
     }
 
     outliers(datasetId, cols, handlingStrategy, calculatingStrategy) {
-        let url = "data/transformation/" + datasetId + '/outliers';
+        let url = "data/transformation/" + datasetId + '/outliers?columns=' + cols;
         if (calculatingStrategy === outliersCalculatingStrategies.Z_SCORES) {
-            url += '?calculatingStrategy=Z_SCORES';
+            url += '&calculatingStrategy=Z_SCORES';
         } else {
-            url += '?calculatingStrategy=APPROX_QUANTILE';
+            url += '&calculatingStrategy=APPROX_QUANTILE';
         }
 
         switch (handlingStrategy) {

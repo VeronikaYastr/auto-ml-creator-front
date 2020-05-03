@@ -116,7 +116,7 @@ export default function UploadData() {
                     setRows(response.firstLines);
 
                     localStorage.setItem("datasetId", response.datasetId);
-                    localStorage.setItem("columns",JSON.stringify(response.columnNames));
+                    localStorage.setItem("columns", JSON.stringify(response.columnNames));
                     console.log(response);
                 }
                 setLoading(false);

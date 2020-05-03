@@ -2,7 +2,7 @@ const normalizerOnSave = () => {
     const inputColumn = localStorage.getItem("inputColumn");
     const outputColumn = localStorage.getItem("outputColumn");
     const norm = localStorage.getItem("norm");
-    addStage({"id": 1, inputColumn, outputColumn, norm});
+    addStage({"id": 1, "type": "normalization", inputColumn, outputColumn, norm});
     localStorage.removeItem("inputColumn");
     localStorage.removeItem("outputColumn");
     localStorage.removeItem("norm");
@@ -22,7 +22,7 @@ const stScalerOnSave = () => {
     withStd = withStd === null ? false : withStd;
     let withMean = localStorage.getItem("withMean");
     withMean = withMean === null ? false : withMean;
-    addStage({"id": 2, inputColumn, outputColumn, withStd, withMean});
+    addStage({"id": 2, "type": "standardScaler", inputColumn, outputColumn, withStd, withMean});
     localStorage.removeItem("inputColumn");
     localStorage.removeItem("outputColumn");
     localStorage.removeItem("withStd");
