@@ -2,13 +2,13 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import {makeStyles} from "@material-ui/core/styles";
-import normalizationStages from "../../../static/normalization/normStagesInfo";
 import StagesContainer from "../../../containers/StagesContainer";
 import {useHistory} from 'react-router-dom';
 import {grey} from "@material-ui/core/colors";
 import DoneIcon from '@material-ui/icons/Done';
 import Fab from "@material-ui/core/Fab";
-import {ApiService} from "../../../api/ApiService";
+import classificationModels from "../../../static/models/classification/classificationInfo";
+import regressionModels from "../../../static/models/regression/regressionInfo";
 
 const useStyles = makeStyles(theme => ({
     buttonContainer: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Stages() {
+export default function Models() {
     const classes = useStyles();
     const history = useHistory();
     const [selectedGroup, setSelectedGroup] = React.useState(0);
@@ -49,9 +49,9 @@ export default function Stages() {
     const getContent = () => {
         switch (selectedGroup) {
             case 0:
+                return <StagesContainer cards={classificationModels}/>;
             case 1:
-            case 2:
-                return <StagesContainer cards={normalizationStages}/>;
+                return <StagesContainer cards={regressionModels}/>;
             default:
                 return <div>Default</div>;
         }
@@ -74,24 +74,27 @@ export default function Stages() {
     };
 
     const sendStages = () => {
-        let stages = JSON.parse(localStorage.getItem("stages"));
-        const datasetId = JSON.parse(localStorage.getItem("selectedDataset")).id;
-        if (stages === null || stages === undefined) {
-            stages = [];
-        }
-        new ApiService().loadStages(datasetId, stages)
-            .then((response) => {
-                if (response === undefined) {
-                    console.log("Undefined response.");
-                } else if (response.error || response.errors) {
-                    console.log("Error request.");
-                } else {
-                    console.log("Successful request.");
-                    history.push('/savePipeline');
-                }
-            }).catch((error) => {
-            console.log("Unexpected error: " + error);
-        });
+        let category = selectedGroup === 0 ? "classification" : "regression";
+        localStorage.setItem("selectedModelType", JSON.stringify(category));
+        history.push('/addValidationAndScore');
+        /* let stages = JSON.parse(localStorage.getItem("stages"));
+         const datasetId = JSON.parse(localStorage.getItem("selectedDataset")).id;
+         if (stages === null || stages === undefined) {
+             stages = [];
+         }
+         new ApiService().loadStages(datasetId, stages)
+             .then((response) => {
+                 if (response === undefined) {
+                     console.log("Undefined response.");
+                 } else if (response.error || response.errors) {
+                     console.log("Error request.");
+                 } else {
+                     console.log("Successful request.");
+                     history.push('/savePipeline');
+                 }
+             }).catch((error) => {
+             console.log("Unexpected error: " + error);
+         });*/
     };
 
     return (
@@ -100,18 +103,10 @@ export default function Stages() {
                 <ButtonGroup variant="text" aria-label="Select stages">
                     <Button className={selectedGroup === 0 ? classes.selectedButtonText : classes.buttonText}
                             color={selectedGroup === 0 ? "primary" : "secondary"}
-                            onClick={onClickExtractors}>Extractors</Button>
+                            onClick={onClickExtractors}>Классификация</Button>
                     <Button className={selectedGroup === 1 ? classes.selectedButtonText : classes.buttonText}
                             color={selectedGroup === 1 ? "primary" : "secondary"}
-                            onClick={onClickText}>Text
-                        transformers</Button>
-                    <Button className={selectedGroup === 2 ? classes.selectedButtonText : classes.buttonText}
-                            color={selectedGroup === 2 ? "primary" : "textSecondary"}
-                            onClick={onClickColumnTransformers}>Columns transformers</Button>
-                    <Button className={selectedGroup === 3 ? classes.selectedButtonText : classes.buttonText}
-                            color={selectedGroup === 3 ? "primary" : "textSecondary"}
-                            onClick={onClickCategoricalEncoding}>Categorical
-                        encoding</Button>
+                            onClick={onClickText}>Регрессия</Button>
                 </ButtonGroup>
             </div>
             {getContent()}

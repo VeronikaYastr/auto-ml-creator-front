@@ -28,24 +28,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ChooseDataset() {
+export default function PipelineSelector() {
     const classes = useStyles();
-    const [dataset, setDataset] = React.useState([]);
-    const [selectedDataset, setSelectedDataset] = React.useState('');
+    const [pipeline, setPipeline] = React.useState([]);
+    const [selectedPipeline, setSelectedPipeline] = React.useState('');
 
-    const handleChangeDataset = (event) => {
-        setSelectedDataset(event.target.value);
-        localStorage.setItem("selectedDataset", JSON.stringify(event.target.value));
+    const handleChangePipeline = (event) => {
+        setSelectedPipeline(event.target.value);
+        localStorage.setItem("selectedPipeline", JSON.stringify(event.target.value));
     };
 
     useEffect(() => {
-        new ApiService().getAllDatasetsForUser(1)
+        new ApiService().getAllPipelinesForUser(1)
             .then((response) => {
                 if (response === undefined || response.errors) {
                     console.log("Received error from server.");
-                    setDataset([]);
+                    setPipeline([]);
                 } else {
-                    setDataset(response);
+                    setPipeline(response);
                 }
             }).catch((error) => {
             console.log("Unexpected error.");
@@ -55,17 +55,17 @@ export default function ChooseDataset() {
     return (
         <div className={classes.root}>
             <FormControl className={classes.formControl}>
-                <InputLabel id="demo-simple-select-helper-label">Выберите набор данных</InputLabel>
+                <InputLabel id="demo-simple-select-helper-label">Выберите пайплайн</InputLabel>
                 <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    value={selectedDataset.name}
-                    onChange={handleChangeDataset}
+                    value={selectedPipeline.name}
+                    onChange={handleChangePipeline}
                 >
-                    {dataset.map(d => <MenuItem value={d}>{d.name}</MenuItem>)}
+                    {pipeline.map(p => <MenuItem value={p}>{p.name}</MenuItem>)}
                 </Select>
             </FormControl>
-            <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/addPipeline">
+            <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/selectModel">
                 <NavigateNextIcon/>
             </Fab>
         </div>

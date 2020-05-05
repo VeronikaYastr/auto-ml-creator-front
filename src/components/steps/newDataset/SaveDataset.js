@@ -75,6 +75,8 @@ export default function SaveDataset() {
                     console.log("Successful request.");
                     history.push('/datasets');
                 }
+                localStorage.removeItem("datasetId");
+                localStorage.removeItem("columns");
             }).catch((error) => {
             console.log("Unexpected error: " + error);
             setMessage("Unexpected error.");

@@ -12,6 +12,7 @@ import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import {useN03TextInfoContentStyles} from "@mui-treasury/styles/textInfoContent/n03";
 import {useLightTopShadowStyles} from "@mui-treasury/styles/shadow/lightTop";
 import Chip from "@material-ui/core/Chip";
+import {Link as RouterLink} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -62,7 +63,7 @@ export default function ModelCard(props) {
             </CardContent>
             <CardActions disableSpacing className={cardStyles.actions}>
                 <PlayCircleOutlineIcon className={cardStyles.icon}/>
-                <Button size="small" className={cardStyles.createdBy}>RUN</Button>
+                <Button component={RouterLink} to="/runModel" size="small" className={cardStyles.createdBy}>RUN</Button>
             </CardActions>
         </Card>
         /*  <Card className={classes.root}>

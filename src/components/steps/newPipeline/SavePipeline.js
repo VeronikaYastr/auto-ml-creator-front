@@ -85,6 +85,7 @@ export default function SavePipeline() {
                     console.log("Successful request.");
                     history.push('/pipelines');
                 }
+                localStorage.removeItem("selectedDataset");
             }).catch((error) => {
             console.log("Unexpected error: " + error);
             setMessage("Unexpected error.");
