@@ -31,20 +31,20 @@ export default function MenuDrawer(props) {
             onKeyDown={props.onClick(false)}
         >
             <List>
-                <ListItem button key={"Projects"} component={RouterLink} to="/home">
+                <ListItem button key={"Проекты"} component={RouterLink} to="/home">
                     <img src={homeImage} height="40" width="40" alt="Ml Creator"/>
                    {/* <ListItemIcon> <HomeIcon className={cardStyles.icon} color="primary"/></ListItemIcon>*/}
-                    <ListItemText primary={"Projects"}/>
+                    <ListItemText primary={"Проекты"}/>
                 </ListItem>
                 <Divider/>
-                <ListItem button key={"Pipelines"} component={RouterLink} to="/pipelines">
+                <ListItem button key={"Пайплайны"} component={RouterLink} to="/pipelines">
                     <img src={pipelineImage} height="40" width="40" alt="Pipeline"/>
-                    <ListItemText primary={"Pipelines"}/>
+                    <ListItemText primary={"Пайплайны"}/>
                 </ListItem>
-                <ListItem button key={"Datasets"} component={RouterLink} to="/datasets">
+                <ListItem button key={"Датасеты"} component={RouterLink} to="/datasets">
                     <img src={datasetImage} height="40" width="40" alt="Pipeline"/>
                    {/* <ListItemIcon> <StorageOutlinedIcon className={cardStyles.smallIcon} color="secondary"/></ListItemIcon>*/}
-                    <ListItemText primary={"Datasets"}/>
+                    <ListItemText primary={"Датасеты"}/>
                 </ListItem>
             </List>
         </div>

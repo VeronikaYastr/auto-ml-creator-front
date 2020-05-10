@@ -155,15 +155,15 @@ export default function MissingValues() {
         new ApiService().nullValues(strategy, datasetId, selectedCols, minNonValue, fillValue)
             .then((response) => {
                 if (response === undefined) {
-                    setMessage("No response from server.");
+                    setMessage("Нет ответа от сервера.");
                     setErrorOpen(true);
                 } else if (response.error || response.errors) {
                     console.log("Received error from server.");
-                    setMessage("Error from server while request: " + response.errors);
+                    setMessage("Ошибка во время запроса на сервер: " + response.errors);
                     setErrorOpen(true);
                 } else {
                     console.log("Successful request.");
-                    setMessage(response + " rows were dropped.");
+                    setMessage(response + " строк было удалено.");
                     setOpen(true);
                     setStrategy(strategies.NONE);
                     setAllColumnsSelected(false);
@@ -172,7 +172,7 @@ export default function MissingValues() {
                 }
             }).catch((error) => {
             console.log("Unexpected error: " + error);
-            setMessage("Unexpected error.");
+            setMessage("Ошибка.");
             setErrorOpen(true);
         });
     };
@@ -182,7 +182,7 @@ export default function MissingValues() {
             <div className={classes.buttonContainer}>
                 <div className={classes.formsContainer}>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-mutiple-chip-label">Columns</InputLabel>
+                        <InputLabel id="demo-mutiple-chip-label">Столбцы</InputLabel>
                         <Select
                             labelId="demo-mutiple-chip-label"
                             id="demo-mutiple-chip"
@@ -194,7 +194,7 @@ export default function MissingValues() {
                         >
                             <MenuItem key="all" value="All"
                                       style={getStyles("All", selectedColumns, theme)}>
-                                All
+                                Все
                             </MenuItem>
                             {!allColumnsSelected &&
                             columns.map(columnName => (
@@ -211,19 +211,19 @@ export default function MissingValues() {
                             <Chip key={value} label={value} className={classes.chip}/>))}
                     </div>}
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-helper-label">Strategy</InputLabel>
+                        <InputLabel id="demo-simple-select-helper-label">Стратегия</InputLabel>
                         <Select
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={strategy}
                             onChange={handleChange}
                         >
-                            <MenuItem value={0}>Drop any</MenuItem>
-                            <MenuItem value={1}>Drop all</MenuItem>
-                            <MenuItem value={2}>Drop by minNonNull</MenuItem>
-                            <MenuItem value={3}>Fill with median</MenuItem>
-                            <MenuItem value={4}>Fill with mean</MenuItem>
-                            <MenuItem value={5}>Fill with custom value</MenuItem>
+                            <MenuItem value={0}>Удалить любые</MenuItem>
+                            <MenuItem value={1}>Удалить все</MenuItem>
+                            <MenuItem value={2}>Удалить с помощью minNonNull</MenuItem>
+                            <MenuItem value={3}>Заполнить медианой</MenuItem>
+                            <MenuItem value={4}>Заполнить средним значением</MenuItem>
+                            <MenuItem value={5}>Заполнить указанным значением</MenuItem>
                         </Select>
                     </FormControl>
                     {(strategy === strategies.DROP.MIN_NON_NULL) &&
@@ -231,10 +231,10 @@ export default function MissingValues() {
                                label="MinNonNull"/>}
                     {(strategy === strategies.FILL.CUSTOM_VALUE) &&
                     <TextField onChange={handleCustomValueChange} className={classes.input} id="outlined-basic"
-                               label="Custom value"/>}
+                               label="Значение"/>}
                 </div>
                 <Divider style={{maxHeight: 350}} variant="middle" orientation="vertical" flexItem/>
-                <InfoCard card={{title: "Missing values", description: strategyMessage}}/>
+                <InfoCard card={{title: "Пропущенные значения", description: strategyMessage}}/>
                 <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                           open={errorOpen ? errorOpen : open}
                           autoHideDuration={3000}
@@ -248,7 +248,7 @@ export default function MissingValues() {
             <Button variant="contained" component="span" color="primary"
                     className={classes.uploadButton}
                     onClick={sendToServer}>
-                Apply
+                Применить
             </Button>
         </div>
     );

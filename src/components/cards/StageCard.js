@@ -1,8 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import {makeStyles} from "@material-ui/core/styles";
-import RadioButtonUncheckedOutlinedIcon from '@material-ui/icons/RadioButtonUncheckedOutlined';
-import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import {useN03TextInfoContentStyles} from "@mui-treasury/styles/textInfoContent/n03";
 import {useLightTopShadowStyles} from "@mui-treasury/styles/shadow/lightTop";
 import cx from "clsx";
@@ -20,8 +18,7 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 275,
-        maxWidth: 343,
+        width: 340,
         borderRadius: 10,
     },
     cardTitle: {
@@ -61,18 +58,15 @@ export default function StageCard(props) {
     const styles = useN03TextInfoContentStyles();
     const shadowStyles = useLightTopShadowStyles();
     const cardStyles = useStyles();
-    const [selected, setSelected] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
     const handleCancel = () => {
         setOpen(false);
-        setSelected(false);
         props.onCancelClick();
     };
 
     const handleOk = () => {
         setOpen(false);
-        setSelected(true);
         props.onSaveClick();
     };
 
@@ -80,20 +74,11 @@ export default function StageCard(props) {
         setOpen(true);
     };
 
-    const onCheckedClick = () => {
-        setSelected(false);
-        props.onCancelClick();
-    };
-
     return (
         <div>
-            <Card className={cx(cardStyles.root, shadowStyles.root)}>
+            <Card onClick={onClick} className={cx(cardStyles.root, shadowStyles.root)}>
                 <BrandCardHeader
                     image={image}
-                    extra={selected ?
-                        <CheckCircleOutlineOutlinedIcon onClick={onCheckedClick} className={cardStyles.selectedIcon}/> :
-                        <RadioButtonUncheckedOutlinedIcon onClick={onClick} className={cardStyles.icon}/>
-                    }
                 />
                 <CardContent className={cardStyles.content}>
                     <TextInfoContent
@@ -115,10 +100,10 @@ export default function StageCard(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCancel} color="secondary">
-                        Cancel
+                        Отменить
                     </Button>
                     <Button onClick={handleOk} color="primary">
-                        Save
+                        Добавить
                     </Button>
                 </DialogActions>
             </Dialog>

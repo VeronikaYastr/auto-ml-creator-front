@@ -7,20 +7,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Input from "@material-ui/core/Input";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import {functions} from "../../../../static/stagesFunctions";
 
 const useStyles = makeStyles(theme => ({
-    buttonContainer: {
-        flex: 1,
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginRight: 100,
-        height: 400
-    },
     formsContainer: {
         flex: 1,
         backgroundColor: theme.palette.background.paper,
@@ -32,14 +21,6 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(2),
         width: 250,
     },
-    chips: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        maxWidth: 350,
-    },
-    chip: {
-        margin: 2,
-    },
     input: {
         width: 250,
         marginLeft: 17,
@@ -49,32 +30,26 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function StandardScaler() {
+export default function OneHotEncoder() {
     const classes = useStyles();
     const [outputColumn, setOutputColumn] = React.useState('');
-    const [selectedColumn, setSelectedColumn] = React.useState([]);
-    const [withMean, setWithMean] = React.useState(false);
-    const [withStd, setWithStd] = React.useState(false);
+    const [selectedColumn, setSelectedColumn] = React.useState('');
+    const [handleInvalid, setHandleInvalid] = React.useState('');
     const columns = functions.getColumns();
 
     const handleChangeMultiple = event => {
-        localStorage.setItem("stSc_inputColumn", event.target.value);
+        localStorage.setItem("ohe_inputColumn", event.target.value);
         setSelectedColumn(event.target.value);
     };
 
     const handleChangeOutputColumn = (event) => {
-        localStorage.setItem("stSc_outputColumn", event.target.value);
+        localStorage.setItem("ohe_outputColumn", event.target.value);
         setOutputColumn(event.target.value);
     };
 
-    const handleChangeWithMean = (event) => {
-        localStorage.setItem("stSc_withMean", event.target.checked);
-        setWithMean(event.target.checked);
-    };
-
-    const handleChangeWithStd = (event) => {
-        localStorage.setItem("stSc_withStd", event.target.checked);
-        setWithStd(event.target.checked);
+    const handleChangeHandleInvalid = (event) => {
+        localStorage.setItem("ohe_handleInvalid", event.target.value);
+        setHandleInvalid(event.target.value);
     };
 
     return (
@@ -96,41 +71,25 @@ export default function StandardScaler() {
                     }
                 </Select>
             </FormControl>
-            <Tooltip title="Название преобразованной колонки">
+            <Tooltip title="Название полученного столбца">
                 <TextField placeholder="Выходная переменная"
                            required
                            className={classes.input}
                            onChange={handleChangeOutputColumn}
                            id="multiline-input-with-icon-grid"/>
             </Tooltip>
-            <FormControlLabel
-                className={classes.checkBox}
-                control={
-                    <Tooltip title="Centers the data with mean before scaling.">
-                        <Checkbox
-                            checked={withMean}
-                            onChange={handleChangeWithMean}
-                            name="withMean"
-                            color="primary"
-                        />
-                    </Tooltip>
-                }
-                label="Со средним"
-            />
-            <FormControlLabel
-                className={classes.checkBox}
-                control={
-                    <Tooltip title="Scales the data to unit standard deviation.">
-                        <Checkbox
-                            checked={withStd}
-                            onChange={handleChangeWithStd}
-                            name="withStd"
-                            color="primary"
-                        />
-                    </Tooltip>
-                }
-                label="Со стандартным распределением"
-            />
+            <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-handle-invalid">Обработка неверных значений</InputLabel>
+                <Select
+                    labelId="demo-simple-select-handle-invalid-label"
+                    id="simple-select-handle-invalid-label"
+                    value={handleInvalid}
+                    onChange={handleChangeHandleInvalid}
+                >
+                    <MenuItem value={"keep"}>Оставить</MenuItem>
+                    <MenuItem value={"error"}>Выдать ошибку</MenuItem>
+                </Select>
+            </FormControl>
         </div>
     );
 }

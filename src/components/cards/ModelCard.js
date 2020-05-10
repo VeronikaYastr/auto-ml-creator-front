@@ -63,7 +63,7 @@ export default function ModelCard(props) {
             </CardContent>
             <CardActions disableSpacing className={cardStyles.actions}>
                 <PlayCircleOutlineIcon className={cardStyles.icon}/>
-                <Button component={RouterLink} to="/runModel" size="small" className={cardStyles.createdBy}>RUN</Button>
+                <Button component={RouterLink} to="/runModel" size="small" className={cardStyles.createdBy}>Запуск</Button>
             </CardActions>
         </Card>
         /*  <Card className={classes.root}>

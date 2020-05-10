@@ -150,15 +150,15 @@ export default function Outliers() {
         new ApiService().outliers(datasetId, selectedCols, handlingStrategy, calculatingStrategy)
             .then((response) => {
                 if (response === undefined) {
-                    setMessage("No response from server.");
+                    setMessage("Нет ответа от сервера.");
                     setErrorOpen(true);
                 } else if (response.error || response.errors) {
                     console.log("Received error from server.");
-                    setMessage("Error from server while request: " + response.errors);
+                    setMessage("Ошибка во время запроса на сервер: " + response.errors);
                     setErrorOpen(true);
                 } else {
                     console.log("Successful request.");
-                    setMessage("Successful request.");
+                    setMessage("Успешный запрос.");
                     setOpen(true);
                     setCalculatingStrategyMessage(outliersCalculatingStrategies.NONE);
                     setHandlingStrategy(outliersHandlingStrategies.NONE);
@@ -168,7 +168,7 @@ export default function Outliers() {
                 }
             }).catch((error) => {
             console.log("Unexpected error: " + error);
-            setMessage("Unexpected error.");
+            setMessage("Ошибка.");
             setErrorOpen(true);
         });
     };
@@ -178,7 +178,7 @@ export default function Outliers() {
             <div className={classes.buttonContainer}>
                 <div className={classes.formsContainer}>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-mutiple-chip-label">Columns</InputLabel>
+                        <InputLabel id="demo-mutiple-chip-label">Столбцы</InputLabel>
                         <Select
                             labelId="demo-mutiple-chip-label"
                             id="demo-mutiple-chip"
@@ -190,7 +190,7 @@ export default function Outliers() {
                         >
                             <MenuItem key="all" value="All"
                                       style={getStyles("All", selectedColumns, theme)}>
-                                All
+                                Все
                             </MenuItem>
                             {!allColumnsSelected &&
                             columns.map(columnName => (
@@ -207,7 +207,7 @@ export default function Outliers() {
                             <Chip key={value} label={value} className={classes.chip}/>))}
                     </div>}
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-helper-label">Detecting strategy</InputLabel>
+                        <InputLabel id="demo-simple-select-helper-label">Стратегия обнаружения</InputLabel>
                         <Select
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
@@ -219,21 +219,21 @@ export default function Outliers() {
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-helper-label">Handling strategy</InputLabel>
+                        <InputLabel id="demo-simple-select-helper-label">Стратегия обработки</InputLabel>
                         <Select
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={handlingStrategy}
                             onChange={handleOutliersHandlingChange}
                         >
-                            <MenuItem value={0}>Drop</MenuItem>
-                            <MenuItem value={1}>Replace with median</MenuItem>
-                            <MenuItem value={2}>Replace with mean</MenuItem>
+                            <MenuItem value={0}>Удалить</MenuItem>
+                            <MenuItem value={1}>Заменить медианой</MenuItem>
+                            <MenuItem value={2}>Заменить средним</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
                 <Divider style={{maxHeight: 350}} variant="middle" orientation="vertical" flexItem/>
-                <InfoCard card={{title: "Detecting outliers", description: calculatingStrategyMessage}}/>
+                <InfoCard card={{title: "Определение выбросов", description: calculatingStrategyMessage}}/>
                 <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                           open={errorOpen ? errorOpen : open}
                           autoHideDuration={3000}
@@ -247,7 +247,7 @@ export default function Outliers() {
             <Button variant="contained" component="span" color="primary"
                     className={classes.uploadButton}
                     onClick={sendToServer}>
-                Apply
+                Применить
             </Button>
         </div>
     );

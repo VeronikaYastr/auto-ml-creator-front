@@ -6,7 +6,7 @@ import React, {useEffect} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {ApiService} from "../../../api/ApiService";
 import Fab from "@material-ui/core/Fab";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useHistory} from 'react-router-dom';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import DoneIcon from '@material-ui/icons/Done';
 
@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function DatasetSelector() {
     const classes = useStyles();
+    const history = useHistory();
     const [dataset, setDataset] = React.useState([]);
     const [selectedDataset, setSelectedDataset] = React.useState('');
     const [pipeline, setPipeline] = React.useState([]);
@@ -44,7 +45,6 @@ export default function DatasetSelector() {
 
     const handleChangePipeline = (event) => {
         setSelectedPipeline(event.target.value);
-        localStorage.setItem("selectedPipeline", JSON.stringify(event.target.value));
     };
 
     useEffect(() => {
@@ -62,15 +62,28 @@ export default function DatasetSelector() {
         new ApiService().getAllPipelinesForUser(1)
             .then((response) => {
                 if (response === undefined || response.errors) {
-                    console.log("Received error from server.");
+                    console.log("Ошибка от сервера.");
                     setPipeline([]);
                 } else {
                     setPipeline(response);
                 }
             }).catch((error) => {
-            console.log("Unexpected error.");
+            console.log("Ошибка.");
         });
     }, []);
+
+    const sendToServer = () => {
+        const datasetId = selectedDataset.id;
+        const pipelineId = selectedPipeline.id;
+        new ApiService().bindPipeline(datasetId, pipelineId)
+            .then((response) => {
+                console.log("Successful request.");
+                localStorage.removeItem("selectedDataset");
+                history.push('/pipelines');
+            }).catch((error) => {
+            console.log("Unexpected error: " + error);
+        });
+    };
 
     return (
         <div className={classes.root}>
@@ -96,8 +109,7 @@ export default function DatasetSelector() {
                     {pipeline.map(d => <MenuItem value={d}>{d.name}</MenuItem>)}
                 </Select>
             </FormControl>
-            {selectedPipeline ? <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink}
-                                     to="/pipelines">
+            {selectedPipeline ? <Fab color="primary" aria-label="add" className={classes.button} onClick={sendToServer}>
                     <DoneIcon/>
                 </Fab> :
                 <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink}

@@ -107,8 +107,8 @@ export default function MenuComponent() {
                                 open={open}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
+                                <MenuItem onClick={handleClose}>Профиль</MenuItem>
+                                <MenuItem onClick={handleClose}>Мой аккаунт</MenuItem>
                             </Menu>
                         </div>
                     )}

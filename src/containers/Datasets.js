@@ -58,7 +58,7 @@ const Datasets = () => {
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title} color="inherit">
-                Datasets
+                Датасеты
             </Typography>
             {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : datasets &&
                 <DatasetsContainer cards={datasets}/>}

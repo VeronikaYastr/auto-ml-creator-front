@@ -65,11 +65,11 @@ export default function SaveDataset() {
         new ApiService().createDataset(1, datasetId, name, description)
             .then((response) => {
                 if (response === undefined) {
-                    setMessage("No response from server.");
+                    setMessage("Нет ответа от сервера.");
                     setErrorOpen(true);
                 } else if (response.error || response.errors) {
                     console.log("Received error from server.");
-                    setMessage("Error from server while request: " + response.errors);
+                    setMessage("Ошибка во время запроса на сервер: " + response.errors);
                     setErrorOpen(true);
                 } else {
                     console.log("Successful request.");
@@ -79,7 +79,7 @@ export default function SaveDataset() {
                 localStorage.removeItem("columns");
             }).catch((error) => {
             console.log("Unexpected error: " + error);
-            setMessage("Unexpected error.");
+            setMessage("Ошибка.");
             setErrorOpen(true);
         });
     };
@@ -95,7 +95,7 @@ export default function SaveDataset() {
                         <TitleIcon/>
                     </Grid>
                     <Grid item>
-                        <TextField onChange={handleNameChange} required id="input-with-icon-grid" label="Name"/>
+                        <TextField onChange={handleNameChange} required id="input-with-icon-grid" label="Название"/>
                     </Grid>
                 </Grid>
                 <Grid container spacing={1} alignItems="flex-end" className={classes.input}>
@@ -103,7 +103,7 @@ export default function SaveDataset() {
                         <ShortTextIcon/>
                     </Grid>
                     <Grid item>
-                        <TextField placeholder="Description"
+                        <TextField placeholder="Описание"
                                    multiline
                                    required
                                    onChange={handleDescriptionChange}
@@ -112,7 +112,7 @@ export default function SaveDataset() {
                 </Grid>
                 <Button onClick={sendToServer} variant="contained" color="primary" component="span"
                         className={classes.uploadButton}>
-                    Save
+                    Сохранить
                 </Button>
             </div>
             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}

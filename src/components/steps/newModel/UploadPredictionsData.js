@@ -77,8 +77,8 @@ export default function UploadData() {
     const [errorOpen, setErrorOpen] = React.useState(false);
     const [openTable, setOpenTable] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
-    const [rows, setRows] = React.useState([["Iris-setosa"], ["Iris-setosa"]]);
-    const [columnNames, setColumnNames] = React.useState(['predictions']);
+    const [rows, setRows] = React.useState([["Iris-setosa"], ["Iris-setosa"], ["Iris-versicolor"], ["Iris-virginica"], ["Iris-setosa"]]);
+    const [columnNames, setColumnNames] = React.useState(['прогноз']);
 
     const handleClose = (event, reason) => {
         setOpen(false);

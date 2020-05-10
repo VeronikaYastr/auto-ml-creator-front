@@ -60,14 +60,14 @@ let enabledTab = -1;
 
 const tabs = [
     [
-        <Tab disabled={0 <= enabledTab} label="Upload" {...a11yProps(0)} />,
-        <Tab disabled={1 <= enabledTab} label="Clean" {...a11yProps(1)} />,
-        <Tab disabled={2 <= enabledTab} label="Transform" {...a11yProps(2)} />,
-        <Tab disabled={3 <= enabledTab} label="Remove outliers" {...a11yProps(3)} />
+        <Tab disabled={0 <= enabledTab} label="Загрузка" {...a11yProps(0)} />,
+        <Tab disabled={1 <= enabledTab} label="Очистка" {...a11yProps(1)} />,
+        <Tab disabled={2 <= enabledTab} label="Преобразование" {...a11yProps(2)} />,
+        <Tab disabled={3 <= enabledTab} label="Очистка от выбросов" {...a11yProps(3)} />
     ],
     [
-        <Tab label="Choose" {...a11yProps(0)} />,
-        <Tab label="Fill parameters" {...a11yProps(1)} />
+        <Tab label="Выбрать" {...a11yProps(0)} />,
+        <Tab label="Заполнить параметры" {...a11yProps(1)} />
     ]
 ];
 

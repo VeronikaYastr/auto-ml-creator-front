@@ -58,7 +58,7 @@ const Pipelines = () => {
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title} color="inherit">
-                Pipelines
+                Пайплайны
             </Typography>
             {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : pipelines &&
                 <PipelinesContainer cards={pipelines}/>}

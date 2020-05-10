@@ -61,7 +61,7 @@ const NewDataset = () => {
     return (
         <ScrollArea speed={0.2} smoothScrolling={true}>
             <div className={classes.root}>
-                <MLStepper getStepContent={getStepContent} steps={["Upload", "Missing values", "Outliers", "Save"]}/>
+                <MLStepper getStepContent={getStepContent} steps={["Загрузка", "Пропущенные значения", "Выбросы", "Сохранить"]}/>
             </div>
         </ScrollArea>
     );

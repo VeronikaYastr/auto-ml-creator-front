@@ -30,12 +30,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function PipelineSelector() {
     const classes = useStyles();
+    const [dataset, setDataset] = React.useState([]);
+    const [selectedDataset, setSelectedDataset] = React.useState('');
     const [pipeline, setPipeline] = React.useState([]);
     const [selectedPipeline, setSelectedPipeline] = React.useState('');
 
     const handleChangePipeline = (event) => {
         setSelectedPipeline(event.target.value);
+        getDatasets(event.target.value.id);
         localStorage.setItem("selectedPipeline", JSON.stringify(event.target.value));
+    };
+
+    const handleChangeDataset = (event) => {
+        setSelectedDataset(event.target.value);
+        localStorage.setItem("selectedDataset", JSON.stringify(event.target.value));
     };
 
     useEffect(() => {
@@ -52,6 +60,20 @@ export default function PipelineSelector() {
         });
     }, []);
 
+    const getDatasets = (pipelineId) => {
+        new ApiService().getDatasetsForPipeline(pipelineId)
+            .then((response) => {
+                if (response === undefined || response.errors) {
+                    console.log("Received error from server.");
+                    setDataset([]);
+                } else {
+                    setDataset(response);
+                }
+            }).catch((error) => {
+            console.log("Unexpected error.");
+        });
+    }
+
     return (
         <div className={classes.root}>
             <FormControl className={classes.formControl}>
@@ -65,6 +87,19 @@ export default function PipelineSelector() {
                     {pipeline.map(p => <MenuItem value={p}>{p.name}</MenuItem>)}
                 </Select>
             </FormControl>
+            {
+                dataset && <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-helper-label">Выберите набор данных</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-helper-label"
+                        id="demo-simple-select-helper"
+                        value={selectedDataset.name}
+                        onChange={handleChangeDataset}
+                    >
+                        {dataset.map(d => <MenuItem value={d}>{d.name}</MenuItem>)}
+                    </Select>
+                </FormControl>
+            }
             <Fab color="primary" aria-label="add" className={classes.button} component={RouterLink} to="/selectModel">
                 <NavigateNextIcon/>
             </Fab>

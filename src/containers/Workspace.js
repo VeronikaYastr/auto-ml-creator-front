@@ -61,7 +61,7 @@ const Workspace = () => {
         <ScrollArea speed={0.2} smoothScrolling={true}>
             <div className={classes.root}>
                 <Typography variant="h4" className={classes.title} color="inherit">
-                    Workspace
+                    Рабочее пространство
                 </Typography>
                 <MLStepper/>
                 {/*<Fab aria-label="add" className={classes.saveButton} component={RouterLink} to="/add">

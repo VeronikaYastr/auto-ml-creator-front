@@ -31,6 +31,11 @@ export class ApiService {
         return this.apiClient.get('pipelines/' + userId);
     }
 
+    getDatasetsForPipeline(pipelineId) {
+        console.log("Request datasets fot pipeline");
+        return this.apiClient.get('pipelines/' + pipelineId + '/datasets');
+    }
+
     createDataset(userId, datasetId, name, description) {
         return this.apiClient.post('ml-datasets/' + userId, {
             "id": datasetId,
@@ -45,6 +50,10 @@ export class ApiService {
             name,
             description
         })
+    }
+
+    bindPipeline(datasetId, pipelineId) {
+        return this.apiClient.postWithoutBody('pipelines/bind/' + datasetId + '/' + pipelineId)
     }
 
     loadStages(datasetId, stages) {

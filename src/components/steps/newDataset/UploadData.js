@@ -104,12 +104,12 @@ export default function UploadData() {
             .then((response) => {
                 if (response === undefined || response.errors) {
                     console.log("Received error from server.");
-                    setMessage("Error from server while uploading " + files.name);
+                    setMessage("Ошибка во время загрузки " + files.name);
                     setErrorOpen(true);
                 } else {
                     console.log("Successfully loaded.");
 
-                    setMessage(files.name + " is successfully loaded on server.");
+                    setMessage(files.name + " успешно зашгружен на сервер.");
                     setOpen(true);
                     setOpenTable(true);
                     setColumnNames(response.columnNames);
@@ -122,7 +122,7 @@ export default function UploadData() {
                 setLoading(false);
             }).catch((error) => {
             console.log("Unexpected error.");
-            setMessage("Error while uploading " + files.name);
+            setMessage("Ошибка " + files.name);
             setErrorOpen(true);
             setLoading(false);
         });
@@ -140,7 +140,7 @@ export default function UploadData() {
                         <div>
                             <Button variant="contained" component="span" className={classes.uploadButton}
                                     onClick={uploadFile}>
-                                Upload
+                                Загрузить
                             </Button>
                             <Snackbar anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                                       open={errorOpen ? errorOpen : open}
@@ -163,7 +163,7 @@ export default function UploadData() {
                 />
                 <label htmlFor="raised-button-file">
                     <Button variant="contained" component="span" className={classes.chooseButton}>
-                        Choose file
+                        Выбрать файл
                     </Button>
                 </label>
             </div>)}

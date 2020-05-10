@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         flexDirection: "row",
     },
     title: {
-        fontSize: 24,
+        fontSize: 20,
         paddingLeft: 10,
         marginTop: -5,
         fontFamily: 'Muli',

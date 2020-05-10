@@ -59,7 +59,7 @@ const Projects = () => {
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title} color="inherit">
-                Projects
+                Проекты
             </Typography>
             {loading ? <div className={classes.spinnerStyle}><CircularProgress/></div> : models &&
                 <ModelsContainer cards={models}/>}
